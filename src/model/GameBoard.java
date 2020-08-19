@@ -19,14 +19,18 @@ public class GameBoard implements IGameBoard {
 	private boolean saveScore = false;
 
 	private ArrayList observers;
+	private Level level;
 
 	public GameBoard() {
 		observers = new ArrayList();
 
 		highScore = new HighScore();
+		level = new Easy();
 
 		resetGame();
 	}
+
+	
 
 	// notify observer when tiles change
 	public void change(Tile[] tiles) {
@@ -198,8 +202,7 @@ public class GameBoard implements IGameBoard {
 			if (i < 3 && oldLine[i].value == oldLine[i + 1].value) {
 				num *= 2;
 				score += num;
-				int ourTarget = 2048;
-				if (num == ourTarget) {
+				if (num == level.scoreWin()) {
 					win = true;
 				}
 				i++;
