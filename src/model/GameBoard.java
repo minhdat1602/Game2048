@@ -11,38 +11,21 @@ public class GameBoard implements IGameBoard {
 	private Tile[] tiles;
 	private boolean win, lose;
 
-	// score
-	private int score = 0;
-	private int pressedNumber = 0;
+//	private int score = 0;
+//	private int pressedNumber = 0;
 
 	private HighScore highScore;
-	private boolean saveScore = false;
-
 	private ArrayList observers;
-	private Level level;
+	private Sound soundtrack = Sound.getInstance();;
 
 	public GameBoard() {
+		soundtrack.playSoundTrack();
 		observers = new ArrayList();
-
 		highScore = new HighScore();
-		level = new Easy();
-
-		resetGame();
-	}
-
-	
-
-	// notify observer when tiles change
-	public void change(Tile[] tiles) {
-		this.tiles = tiles;
-
-		notifyObservers();
 	}
 
 	public void resetGame() {
-		score = 0;
-		pressedNumber = 0;
-		saveScore = false;
+		highScore = new HighScore();
 		lose = false;
 		tiles = new Tile[4 * 4];
 		for (int i = 0; i < tiles.length; i++) {
@@ -67,8 +50,10 @@ public class GameBoard implements IGameBoard {
 		if (needAddTile) {
 			addTile();
 		}
-		pressedNumber++;
-		System.out.println(pressedNumber);
+		int pressed = highScore.getPressed() + 1;
+		highScore.setPressed(pressed);
+		System.out.println(pressed);
+		//notify change
 		change(tiles);
 	}
 
@@ -201,8 +186,10 @@ public class GameBoard implements IGameBoard {
 			int num = oldLine[i].value;
 			if (i < 3 && oldLine[i].value == oldLine[i + 1].value) {
 				num *= 2;
+				int score = highScore.getScore();
 				score += num;
-				if (num == level.scoreWin()) {
+				highScore.setScore(score);
+				if (num == 2048) {
 					win = true;
 				}
 				i++;
@@ -235,6 +222,13 @@ public class GameBoard implements IGameBoard {
 		System.arraycopy(re, 0, tiles, index * 4, 4);
 	}
 
+	// notify observer when tiles change
+	public void change(Tile[] tiles) {
+		this.tiles = tiles;
+
+		notifyObservers();
+	}
+
 	@Override
 	public void removeObserver(GameObserver go) {
 		int i = observers.indexOf(go);
@@ -256,34 +250,18 @@ public class GameBoard implements IGameBoard {
 		observers.add(go);
 	}
 
-//	public void saveHighScore() {
-//		if (!saveScore) {
-//			if (pressedNumber != 0 && score != 0) {
-//				highScore.addPressed(pressedNumber);
-//				highScore.addScore(score);
-//				saveScore = true;
-//			}
-//		}
-//		System.out.println("save score success...");
-//	}
-	
-	public void saveHighScore() {
-		if (!saveScore) {
-			if (pressedNumber != 0 && score != 0) {
-				highScore.addPressed(pressedNumber);
-				highScore.addScore(score);
-				saveScore = true;
-			}
+	public void saveScore() {
+		if (highScore.getScore() != 0 && highScore.getPressed() != 0) {
+			highScore.addScore(highScore.getScore());
 		}
 		System.out.println("save score success...");
 	}
 
-	public int getPressedNumber() {
-		return pressedNumber;
-	}
-
-	public void setPressedNumber(int pressedNumber) {
-		this.pressedNumber = pressedNumber;
+	public void savePressed() {
+		if (highScore.getScore() != 0 && highScore.getPressed() != 0) {
+			highScore.addPressed(highScore.getPressed());
+		}
+		System.out.println("save pressed success...");
 	}
 
 	public Tile[] getTiles() {
@@ -314,11 +292,7 @@ public class GameBoard implements IGameBoard {
 		this.lose = lose;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
+	public Sound getSoundtrack() {
+		return soundtrack;
 	}
 }

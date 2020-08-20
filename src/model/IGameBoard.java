@@ -17,15 +17,15 @@ public interface IGameBoard {
 
 	public boolean canMove();
 
-	public void saveHighScore();
+	public void saveScore();
+
+	public void savePressed();
 
 	public Tile[] getTiles();
 
 	public boolean isWin();
 
 	public boolean isLose();
-
-	public int getScore();
 
 	// observer
 	public void registerObserver(GameObserver go);
@@ -37,4 +37,6 @@ public interface IGameBoard {
 	public void setLose(boolean b);
 
 	public HighScore getHighScore();
+
+	public Sound getSoundtrack();
 }

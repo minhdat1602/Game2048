@@ -50,13 +50,13 @@ public class Sound {
 		}
 	}
 
-	public void loopSoundTrack() {
-		clip.start();
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
-		System.out.println("Playing soundtrack...");
-	}
+//	public void loopSoundTrack() {
+//		clip.start();
+//		clip.loop(Clip.LOOP_CONTINUOUSLY);
+//		System.out.println("Playing soundtrack...");
+//	}
 
-	public void startSoundTrack() {
+	public void resumeSoundTrack() {
 		clip.setMicrosecondPosition(clipTimePosition);
 		clip.start();
 		playing = true;

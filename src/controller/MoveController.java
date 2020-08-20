@@ -47,7 +47,10 @@ public class MoveController implements KeyEventDispatcher {
 			}
 			if (!gameboard.isWin() && !gameboard.canMove()) {
 				gameboard.setLose(true);
-				gameboard.saveHighScore();
+			}
+			if (gameboard.isWin()) {
+				gameboard.savePressed();
+				gameboard.saveScore();
 			}
 			gameview.repaint();
 

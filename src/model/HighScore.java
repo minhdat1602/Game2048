@@ -10,9 +10,16 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class HighScore {
+	private int score;
+	private int pressed;
+
+	public HighScore(int score, int pressed) {
+		this.score = score;
+		this.pressed = pressed;
+	}
 
 	public HighScore() {
-		// TODO Auto-generated constructor stub
+		this(0, 0);
 	}
 
 	public void addScore(int score) {
@@ -73,7 +80,7 @@ public class HighScore {
 		}
 	}
 
-	public ArrayList<Integer> getScore() {
+	public ArrayList<Integer> getScoreList() {
 		ArrayList<Integer> result = new ArrayList<Integer>(5);
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
@@ -107,7 +114,7 @@ public class HighScore {
 		return result;
 	}
 
-	public ArrayList<Integer> getPressed() {
+	public ArrayList<Integer> getPressedList() {
 		ArrayList<Integer> result = new ArrayList<Integer>(5);
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
@@ -139,6 +146,22 @@ public class HighScore {
 		}
 
 		return result;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getPressed() {
+		return pressed;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public void setPressed(int pressed) {
+		this.pressed = pressed;
 	}
 
 }

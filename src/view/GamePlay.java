@@ -87,12 +87,16 @@ public class GamePlay extends JPanel {
 				g.drawString("press ESC to reset game", 80, getHeight() - 40);
 			}
 			g.setFont(new Font(FONT_NAME, Font.PLAIN, 18));
-			g.drawString("Score: " + gameboard.getScore(), WIDTH + (550 - WIDTH) / 2, 20);
+			g.drawString("Score: " + gameboard.getHighScore().getScore(), WIDTH + (550 - WIDTH) / 2, 20);
 		}
 	}
 
 	private static int offsetCoors(int arg) {
 		return arg * (TILES_MARGIN + TILE_SIZE) + TILES_MARGIN;
+	}
+
+	public Tile[] getTiles() {
+		return tiles;
 	}
 
 	public void setTiles(Tile[] tiles) {

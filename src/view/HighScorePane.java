@@ -65,12 +65,12 @@ public class HighScorePane extends JFrame {
 			top[i].setFont(FONT);
 			add(top[i]);
 
-			topScore[i] = new JLabel(highscore.getScore().get(i) + "", SwingConstants.CENTER);
+			topScore[i] = new JLabel(highscore.getScoreList().get(i) + "", SwingConstants.CENTER);
 			topScore[i].setFont(FONT);
 			topScore[i].setForeground(Color.BLUE);
 			add(topScore[i]);
 
-			topPressed[i] = new JLabel(highscore.getPressed().get(i) + "", SwingConstants.CENTER);
+			topPressed[i] = new JLabel(highscore.getPressedList().get(i) + "", SwingConstants.CENTER);
 			topPressed[i].setFont(FONT);
 			topPressed[i].setForeground(Color.GREEN);
 			add(topPressed[i]);

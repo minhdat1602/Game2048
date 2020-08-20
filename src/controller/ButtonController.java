@@ -27,25 +27,25 @@ public class ButtonController implements ActionListener {
 			System.out.println("exit game success...");
 			System.exit(0);
 		}
-		
+
 		if (e.getSource() == gameview.getFunctionPane().getBtnNewGame()) {
 			gameboard.resetGame();
 			gameview.repaint();
 			System.out.println("new game success...");
 		}
-		
+
 		if (e.getSource() == gameview.getFunctionPane().getBtnHighScore()) {
 			new HighScorePane(gameboard.getHighScore());
 			System.out.println("show score frame...");
 		}
-		
+
 		if (e.getSource() == gameview.getFunctionPane().getBtnSound()) {
-			if (gameview.getSoundtrack().isPlaying()) {
-				gameview.getSoundtrack().stopSoundTrack();
+			if (gameboard.getSoundtrack().isPlaying()) {
+				gameboard.getSoundtrack().stopSoundTrack();
 				gameview.getFunctionPane().getBtnSound().setIcon(new ImageIcon("src/pictures/mute.png"));
 
 			} else {
-				gameview.getSoundtrack().startSoundTrack();
+				gameboard.getSoundtrack().resumeSoundTrack();
 				gameview.getFunctionPane().getBtnSound().setIcon(new ImageIcon("src/pictures/speaker.png"));
 			}
 		}

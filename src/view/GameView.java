@@ -4,24 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 
 import model.GameBoard;
 import model.IGameBoard;
-import model.Sound;
 
 public class GameView extends JFrame implements GameObserver {
 
 	private GamePlay gameplay;
 	private IGameBoard gameboard;
 	private FunctionPane functionPane;
-	private Sound soundtrack = Sound.getInstance();;
 
 	public GameView() {
-		soundtrack.playSoundTrack();
 
 		gameboard = new GameBoard();
 		gameplay = new GamePlay(gameboard);
@@ -52,13 +47,13 @@ public class GameView extends JFrame implements GameObserver {
 	// observer pattern
 	@Override
 	public void update(IGameBoard bo) {
-		
+
 		GameBoard g = (GameBoard) bo;
-		
+
 		gameplay.setTiles(g.getTiles());
-		
-		functionPane.getScorelb().setText("Score:" + g.getScore() + "");
-		functionPane.getPresslb().setText("Pressed: " + g.getPressedNumber() + "");
+
+		functionPane.getScorelb().setText("Score:" + g.getHighScore().getScore() + "");
+		functionPane.getPresslb().setText("Pressed: " + g.getHighScore().getPressed() + "");
 	}
 
 	// them su kien cho cac nut Quit, New Game va High Score va SoundTrack
@@ -85,10 +80,6 @@ public class GameView extends JFrame implements GameObserver {
 
 	public FunctionPane getFunctionPane() {
 		return functionPane;
-	}
-
-	public Sound getSoundtrack() {
-		return soundtrack;
 	}
 
 }
