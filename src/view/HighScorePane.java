@@ -26,7 +26,6 @@ public class HighScorePane extends JFrame {
 
 	private HighScore highscore;
 
-
 	public HighScorePane(HighScore highscore) {
 		this.highscore = highscore;
 

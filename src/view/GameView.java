@@ -52,8 +52,11 @@ public class GameView extends JFrame implements GameObserver {
 	// observer pattern
 	@Override
 	public void update(IGameBoard bo) {
+		
 		GameBoard g = (GameBoard) bo;
+		
 		gameplay.setTiles(g.getTiles());
+		
 		functionPane.getScorelb().setText("Score:" + g.getScore() + "");
 		functionPane.getPresslb().setText("Pressed: " + g.getPressedNumber() + "");
 	}

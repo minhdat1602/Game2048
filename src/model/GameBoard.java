@@ -256,6 +256,17 @@ public class GameBoard implements IGameBoard {
 		observers.add(go);
 	}
 
+//	public void saveHighScore() {
+//		if (!saveScore) {
+//			if (pressedNumber != 0 && score != 0) {
+//				highScore.addPressed(pressedNumber);
+//				highScore.addScore(score);
+//				saveScore = true;
+//			}
+//		}
+//		System.out.println("save score success...");
+//	}
+	
 	public void saveHighScore() {
 		if (!saveScore) {
 			if (pressedNumber != 0 && score != 0) {
